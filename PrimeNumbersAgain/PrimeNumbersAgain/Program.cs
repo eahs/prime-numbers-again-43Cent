@@ -18,9 +18,9 @@ namespace PrimeNumbersAgain
             timer.Stop();
             
             
-            Console.WriteLine($"\nToo easy.. {prime} is the nth prime when n is {n}. I found that answer in {timer.Elapsed.Seconds} seconds.");
+            Console.WriteLine($"\nToo easy.. {prime} is the nth prime when n is {n}. I found that answer in {timer.Elapsed.TotalSeconds:F3} seconds.");
 
-            EvaluatePassingTime(timer.Elapsed.Seconds);
+            EvaluatePassingTime(timer.Elapsed.TotalSeconds);
         }
 
         static int FindNthPrime(int n)
@@ -105,7 +105,7 @@ namespace PrimeNumbersAgain
             
         }
 
-        static void EvaluatePassingTime(int time)
+        static void EvaluatePassingTime(double time)
         {
             Console.WriteLine("\n");
             Console.Write("Time Check: ");
