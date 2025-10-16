@@ -25,35 +25,55 @@ namespace PrimeNumbersAgain
 
         static int FindNthPrime(int n)
         {
+            // this code estimates an upper limit for where the nth prime number might bee
             int limit = (int)(n * (Math.Log(n) + Math.Log(Math.Log(n))));
+
+            // makes a boolean array to mark which numbers are prime. true = prime.
             bool[] isPrime = new bool[limit + 1];
+
+            // fills the whole array with true first, then later marks non primes as false.
             Array.Fill(isPrime, true);
+
+            // 0 and 1 are not prime numbers
             isPrime[0] = false;
             isPrime[1] = false;
 
+            // finds the square root of the limit used to speed up the prime marking 
             int sqrt = (int)Math.Sqrt(limit);
+
+            // go through all numbers starting from 2 up to the square root
             for (int i = 2; i <= sqrt; i++)
             {
+                // if the number is still marked as prime
                 if (isPrime[i])
                 {
+                    // mark all multiples of that number as not prime
                     for (int j = i * i; j <= limit; j += i)
                         isPrime[j] = false;
                 }
             }
 
+            // now count how many primes we have found so far
             int count = 0;
+
+            // loop through the array to find the nth prime
             for (int i = 2; i <= limit; i++)
             {
+                // if this number is prime
                 if (isPrime[i])
                 {
-                    count++;
+                    count++; // increase the prime count
+
+                    // when we reach the nth prime, return that number
                     if (count == n)
                         return i;
                 }
             }
 
+            // if for any case it doesnt return the number it returns -1 instead.
             return -1;
         }
+
 
         static int GetNumber()
         {
